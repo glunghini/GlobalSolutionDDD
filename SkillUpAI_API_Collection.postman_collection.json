@@ -1,0 +1,174 @@
+{
+  "info": {
+    "name": "SkillUpAI API Collection",
+    "_postman_id": "b9e0c203-5d79-4dbb-8b2d-84c62b7d2b4c",
+    "description": "Coleção completa para testar os endpoints da API SkillUpAI (Usuário, Trilha, Competência e Matrícula).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Usuários",
+      "item": [
+        {
+          "name": "Criar Usuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Douglas Luiz\",\n  \"email\": \"douglas@example.com\",\n  \"areaAtuacao\": \"Tecnologia\",\n  \"nivelCarreira\": \"Intermedi\\u00e1rio\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/usuarios",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "usuarios"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar Usuários",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/usuarios"
+          }
+        },
+        {
+          "name": "Buscar Usuário por ID",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/usuarios/1"
+          }
+        },
+        {
+          "name": "Atualizar Usuário",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Douglas Atualizado\",\n  \"email\": \"douglas2@example.com\",\n  \"areaAtuacao\": \"IA e Dados\",\n  \"nivelCarreira\": \"Avan\\u00e7ado\"\n}"
+            },
+            "url": "http://localhost:8080/usuarios/1"
+          }
+        },
+        {
+          "name": "Deletar Usuário",
+          "request": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/usuarios/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Trilhas",
+      "item": [
+        {
+          "name": "Criar Trilha",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"IA e Futuro do Trabalho\",\n  \"descricao\": \"Trilha focada em IA aplicada ao mercado de 2030.\",\n  \"nivel\": \"Avan\\u00e7ado\",\n  \"cargaHoraria\": 40,\n  \"focoPrincipal\": \"Intelig\\u00eancia Artificial\"\n}"
+            },
+            "url": "http://localhost:8080/trilhas"
+          }
+        },
+        {
+          "name": "Listar Trilhas",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/trilhas"
+          }
+        },
+        {
+          "name": "Buscar Trilha por ID",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/trilhas/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Competências",
+      "item": [
+        {
+          "name": "Criar Competência",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Empatia Digital\",\n  \"categoria\": \"Soft Skill\",\n  \"descricao\": \"Capacidade de liderar e colaborar em ambientes virtuais.\"\n}"
+            },
+            "url": "http://localhost:8080/competencias"
+          }
+        },
+        {
+          "name": "Listar Competências",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/competencias"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Matrículas",
+      "item": [
+        {
+          "name": "Criar Matrícula",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuario\": {\n    \"id\": 1\n  },\n  \"trilha\": {\n    \"id\": 1\n  },\n  \"status\": \"ATIVA\"\n}"
+            },
+            "url": "http://localhost:8080/matriculas"
+          }
+        },
+        {
+          "name": "Listar Matrículas",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/matriculas"
+          }
+        }
+      ]
+    }
+  ]
+}
