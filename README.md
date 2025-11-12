@@ -1,110 +1,183 @@
-# SkillUpAI – O Futuro do Trabalho (Global Solution 2025)
+# SkillUpAI – Plataforma de Upskilling e Reskilling para o Futuro do Trabalho
 
-## Contexto
-O projeto SkillUpAI é uma plataforma RESTful voltada para Upskilling e Reskilling profissional, ajudando pessoas a se prepararem para as carreiras do futuro (2030+).
+## 🌍 Contexto
 
-O sistema oferece recursos de cadastro de usuários, trilhas de aprendizagem e matrículas, permitindo que profissionais desenvolvam competências técnicas e humanas conectadas ao futuro do trabalho.
+O futuro do trabalho está sendo moldado por tecnologias como IA, automação e análise de dados. Isso cria a necessidade urgente de **requalificação (Reskilling)** e **aperfeiçoamento contínuo (Upskilling)** dos profissionais, preparando-os para as futuras demandas.
 
-Este projeto se conecta diretamente aos Objetivos de Desenvolvimento Sustentável (ODS) 4, 8, 9 e 10, promovendo educação de qualidade, trabalho digno, inovação e redução das desigualdades.
+A **SkillUpAI** é uma API RESTful desenvolvida em **Java + Spring Boot**, voltada a apoiar essa transformação por meio de trilhas de aprendizado e competências do futuro.
 
-## Tecnologias Utilizadas
-- Java 17  
-- Spring Boot 3.x  
-- Maven  
-- Spring Data JPA  
-- H2 Database (banco em memória)  
-- Bean Validation (Jakarta Validation)
+---
 
-## Como Executar o Projeto
+## 🎯 Objetivo do Projeto
 
-### 1. Clonar o repositório
-```bash
-git clone https://github.com/seuusuario/skillupai.git
-cd skillupai
+Criar uma **API RESTful** que permita:
+
+- Cadastrar usuários (profissionais/alunos);
+- Consultar e gerenciar trilhas de aprendizagem e competências;
+- Matricular usuários em trilhas para desenvolvimento profissional.
+
+---
+
+## ⚙️ Tecnologias Utilizadas
+
+- **Java 17**
+- **Spring Boot 3.5.7**
+- **Spring Data JPA**
+- **H2 Database (modo memória)**
+- **Maven**
+- **Jakarta Validation**
+- **Lombok**
+
+---
+
+## 🧩 Arquitetura
+
+Seguindo o padrão **Camada em Três Níveis (DDD Simplificado)**:
+
+Controller → Service → Repository → Model
+
+
+- **Controller:** expõe endpoints REST.  
+- **Service:** contém regras de negócio e validações.  
+- **Repository:** abstrai o acesso ao banco via JPA.  
+- **Model:** define as entidades persistidas.  
+
+---
+
+## 🗄️ Estrutura do Projeto
+
+src<br>
+├── main/<br>
+│ ├── java/com/skillupai/<br>
+│ │ ├── controller/<br>
+│ │ ├── service/<br>
+│ │ ├── repository/<br>
+│ │ ├── model/<br>
+│ │ └── exception/<br>
+│ ├── resources/<br>
+│ │ ├── application.properties<br>
+│ │ └── data.sql
+
+
+---
+
+## 🧱 Entidades Implementadas
+
+### **Usuário**
+- id  
+- nome  
+- email  
+- área de atuação  
+- nível de carreira  
+- data de cadastro  
+
+### **Trilha**
+- id  
+- nome  
+- descrição  
+- nível  
+- carga horária  
+- foco principal  
+- lista de competências  
+
+### **Competência**
+- id  
+- nome  
+- categoria  
+- descrição  
+
+### **Matrícula**
+- id  
+- usuário (ManyToOne)  
+- trilha (ManyToOne)  
+- data de inscrição  
+- status  
+
+---
+
+## ✅ CRUDs Implementados
+
+| Entidade     | Endpoints principais         | Métodos REST suportados |
+|---------------|------------------------------|--------------------------|
+| Usuário       | `/usuarios`                  | GET, POST, PUT, DELETE   |
+| Trilha        | `/trilhas`                   | GET, POST, PUT, DELETE   |
+| Competência   | `/competencias`              | GET, POST, PUT, DELETE   |
+| Matrícula     | `/matriculas`                | GET, POST, PUT, DELETE   |
+
+---
+
+## 💾 Banco de Dados e Seeds
+
+O banco **H2** é inicializado automaticamente via `schema.sql` e `data.sql`.
+
+### Dados iniciais:
+- 2 usuários  
+- 2 trilhas  
+- 3 competências  
+- 2 matrículas  
+
+O `data.sql` também contém ajustes no `AUTO_INCREMENT` para evitar conflitos ao testar os POSTs no Postman.
+
+---
+
+## ⚠️ Validações e Exceções
+
+Foram aplicadas validações com **Jakarta Validation**:
+- `@NotBlank`
+- `@Email`
+- `@Size`
+- `@Min`
+
+E tratamento global de erros via `@RestControllerAdvice`, com mensagens legíveis e status HTTP adequados (`400`, `404`, `500`).
+
+---
+
+## 🧪 Testes com Postman
+
+O projeto acompanha uma coleção pronta:  
+**SkillUpAI_API_Collection.postman_collection.json**
+
+### Exemplo de Body – POST /usuarios
+```json
+{
+  "nome": "Carla Dias",
+  "email": "carla.dias@email.com",
+  "areaAtuacao": "Design",
+  "nivelCarreira": "Intermediário",
+  "dataCadastro": "2025-11-12"
+}
 ```
+Exemplo de Body – POST /matriculas
+{
+  "usuario": { "id": 1 },
+  "trilha": { "id": 1 },
+  "dataMatricula": "2025-11-12",
+  "progresso": 0
+}
 
-### 2. Instalar dependências e compilar
-```bash
-mvn clean install
-```
+## ▶️ Execução do Projeto
+### Pré-requisitos:
+- JDK 17+
+- Maven 3.8+
+- IntelliJ ou VS Code com suporte Spring Boot
 
-### 3. Executar o projeto
-```bash
-mvn spring-boot:run
-```
-A aplicação será iniciada em:  
-http://localhost:8080
+## 📘 Conexão com o Tema Global Solution
 
-## Endpoints da API
+### O projeto aborda os seguintes ODS da ONU:
+- ODS 4: Educação de Qualidade
+- ODS 8: Trabalho Decente e Crescimento Econômico
+- ODS 9: Indústria, Inovação e Infraestrutura
+- ODS 10: Redução das Desigualdades
 
-### Usuários
-| Método | Endpoint | Descrição |
-|--------|-----------|------------|
-| GET | `/usuarios` | Lista todos os usuários |
-| GET | `/usuarios/{id}` | Busca um usuário por ID |
-| POST | `/usuarios` | Cria um novo usuário |
-| PUT | `/usuarios/{id}` | Atualiza um usuário existente |
-| DELETE | `/usuarios/{id}` | Remove um usuário |
+A SkillUpAI promove a inclusão e o desenvolvimento profissional por meio de tecnologia e aprendizado contínuo.
 
-### Trilhas de Aprendizagem
-| Método | Endpoint | Descrição |
-|--------|-----------|------------|
-| GET | `/trilhas` | Lista todas as trilhas |
-| GET | `/trilhas/{id}` | Busca uma trilha por ID |
-| POST | `/trilhas` | Cria uma nova trilha |
-| PUT | `/trilhas/{id}` | Atualiza uma trilha existente |
-| DELETE | `/trilhas/{id}` | Remove uma trilha |
+## 👥 Equipe
 
-### Matrículas
-| Método | Endpoint | Descrição |
-|--------|-----------|------------|
-| GET | `/matriculas` | Lista todas as matrículas |
-| POST | `/matriculas?usuarioId={idUsuario}&trilhaId={idTrilha}` | Matricula um usuário em uma trilha |
-| DELETE | `/matriculas/{id}` | Cancela uma matrícula |
+### Integrante	RM	Função
 
-## Banco de Dados
-O projeto utiliza o banco de dados em memória H2 para facilitar o desenvolvimento e os testes.
+- Guilherme Lunghini RM 556892
+- Marchel Augusto RM 99856
 
-Acesse o console H2 em:
-```
-http://localhost:8080/h2-console
-```
 
-Configuração padrão:
-```
-JDBC URL: jdbc:h2:mem:testdb
-Usuário: sa
-Senha:
-```
 
-Os dados iniciais são carregados automaticamente a partir do arquivo `data.sql`.
 
-## Estrutura do Projeto
-```
-src/
- ├── main/
- │   ├── java/com/skillupai/
- │   │   ├── controller/       # Camada de controle (API REST)
- │   │   ├── model/            # Entidades JPA
- │   │   ├── repository/       # Repositórios (Spring Data JPA)
- │   │   ├── service/          # Regras de negócio
- │   │   └── exception/        # Exceções personalizadas
- │   └── resources/
- │       ├── application.properties
- │       └── data.sql          # Dados iniciais do banco
- └── test/
-```
-
-## Objetivos do Projeto
-- Promover o desenvolvimento contínuo de profissionais.  
-- Preparar pessoas para as demandas do mercado de trabalho de 2030+.  
-- Integrar competências humanas e tecnológicas.  
-- Apoiar os Objetivos de Desenvolvimento Sustentável:  
-  - ODS 4: Educação de qualidade  
-  - ODS 8: Trabalho decente e crescimento econômico  
-  - ODS 9: Indústria, inovação e infraestrutura  
-  - ODS 10: Redução das desigualdades  
-
-## Autores
-- Guilherme Lunghini — RM RM556892  
-- Marchel Augusto - RM 99856
