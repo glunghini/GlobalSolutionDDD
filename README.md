@@ -108,6 +108,3 @@ src/
 ## Autores
 - Guilherme Lunghini — RM RM556892  
 - Marchel Augusto - RM 99856
-
-## Licença
-Este projeto é de uso educacional e faz parte da disciplina Domain Driven Design – Java (Global Solution 2025).
